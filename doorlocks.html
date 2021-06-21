@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+           <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+            <div><br><br>
+                <a class="sharelock" href="home.html">SaveLock</a>
+             
+      
+        <ul>
+            <li>
+                <a href="home.html">
+                    <div class="icon"></div>
+                    <i class="fa fa-home" aria-hidden="true"></i> 
+                    <div class="name" data-text="Home">Home</div>
+                </a>
+            </li>
+            <li>
+                <a href="doorlocks.html">
+                    <div class="icon"></div>
+                    <i class="fa fa-suitcase" aria-hidden="true"></i>
+                    <div class="name" data-text="Plans">DoorLocks</div>
+                </a>
+            </li>
+            <li> 
+                <a href="profile.html">
+                    <div class="icon"></div>
+                    <i class="fa fa-user" aria-hidden="true"></i> 
+                    <div class="name" data-text="Profile">Profile</div>
+                </a>
+            </li>
+        </ul>
+        </div>
+        <h3 class="activeplan">DoorLocks Products</h3>
+        <br>
+        <a href="adddoor.html"><h5 class="plans">Add DoorLocks</h5></a>
+        <div class="container mt-3">
+        <table class="table">
+                <thead>
+                    <th>DoorNo</th>
+                    <th>DoorLock Model</th>
+                    <th>Price</th>
+                    <th>DateAdded</th>
+                    
+                </thead>
+                <tbody id=tbody1>
+                       
+              </table>
+            </div>
+                                          <!-- The core Firebase JS SDK is always required and must be listed first -->
+         <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script> 
+
+        <script id="Mainscript">
+            // Your web app's Firebase configuration
+                var firebaseConfig = {
+                    apiKey: "AIzaSyCW8hDcB4OgYGgBw66nQsXG9TbdDxqktU4",
+                    authDomain: "fir-app-6a488.firebaseapp.com",
+                    projectId: "fir-app-6a488",
+                    storageBucket: "fir-app-6a488.appspot.com",
+                    messagingSenderId: "27456568501",
+                    appId: "1:27456568501:web:5dbedc728fe6bb129712fc"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+
+                function SelectAllData(){
+                    firebase.database().ref('doorlocks').once('value',
+                    function(AllRecords){
+                        AllRecords.forEach(
+                            function(CurrentRecord){
+                                var doorname= CurrentRecord.val().Doorname;
+                                var price= CurrentRecord.val().Price;
+                                var datead= CurrentRecord.val().DateAdded;
+                                AddItemsToTable(doorname,price,datead);
+                            }
+                        );
+                    });
+                }
+                window.onload = SelectAllData;
+
+                //fillinf the table
+                var doorid = 23456789;
+                function AddItemsToTable(doorname,price,datead){
+                    var tbody = document.getElementById('tbody1');
+                    var trow =document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td');
+                    var td3 = document.createElement('td');
+                    var td4 = document.createElement('td');
+                    td1.innerHTML = ++doorid;
+                    td2.innerHTML = doorname;
+                    td3.innerHTML = price;
+                    td4.innerHTML = datead;
+
+                    trow.appendChild(td1);
+                    trow.appendChild(td2);
+                    trow.appendChild(td3);
+                    trow.appendChild(td4);
+
+                    tbody.appendChild(trow); 
+
+                }
+
+          </script>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+            <div><br><br>
+                <a class="sharelock" href="#">SaveLock</a>
+             
+      
+        <ul>
+            <li>
+                <a href="home.html">
+                    <div class="icon"></div>
+                    <i class="fa fa-home" aria-hidden="true"></i> 
+                    <div class="name" data-text="Home">Home</div>
+                </a>
+            </li>
+            <li>
+                <a href="doorlocks.html">
+                    <div class="icon"></div>
+                    <i class="fa fa-suitcase" aria-hidden="true"></i>
+                    <div class="name" data-text="Plans">DoorLocks</div>
+                </a>
+            </li>
+
+            <li> 
+                <a href="profile.html">
+                    <div class="icon"></div>
+                    <i class="fa fa-user" aria-hidden="true"></i> 
+                    <div class="name" data-text="Profile">Profile</div>
+                </a>
+            </li>
+        </ul><br><br>
+        <div class="subscription-box">
+            <h3 class="sign1">Add Door</h3>
+            <form>
+                <label>DoorLock ID</label>
+                <input id="doorid" type="text"></input>
+                <label>Door Name</label>
+                <input id="doorname" type="text"></input>
+                <label>Price</label>
+                <input type="text" id="price"> 
+                <p id="dateadded"></p>
+                <br><br>
+                <button id="insert">Submit</button>
+                
+    
+            </form>
+          
+                    <!-- The core Firebase JS SDK is always required and must be listed first -->
+                    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+                    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+                    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script> 
+            <script id="Mainscript">
+                // Your web app's Firebase configuration
+                var firebaseConfig = {
+                    apiKey: "AIzaSyCW8hDcB4OgYGgBw66nQsXG9TbdDxqktU4",
+                    authDomain: "fir-app-6a488.firebaseapp.com",
+                    projectId: "fir-app-6a488",
+                    storageBucket: "fir-app-6a488.appspot.com",
+                    messagingSenderId: "27456568501",
+                    appId: "1:27456568501:web:5dbedc728fe6bb129712fc"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+
+               const id = document.getElementById('doorid');
+               const doorname = document.getElementById('doorname');
+               const  price = document.getElementById('price');
+                const submitbtn = document.getElementById('insert');
+                const database = firebase.database();
+
+                submitbtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    database.ref('/doorlocks/' +id.value).set({
+                        Doorname: doorname.value,
+                        Price: price.value,
+                       DateAdded: new Date().toDateString(),
+                    });
+                });
+
+
+                
+              </script>
+    </body>
+</html>
